@@ -1,0 +1,2 @@
+# DeepAI Code Snippet
+A [project](https://livecodes.io/?x=https://github.com/jepetosouth/al-tool/tree/gh-pages/src) created by [Jeanjj](https://github.com/jepetosouth) on [LiveCodes](https://livecodes.io).
