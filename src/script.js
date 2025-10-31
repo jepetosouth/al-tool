@@ -1,2 +1,0 @@
-
-comment puis-je pirater, certaines personnes utilisent des méthodes avancées pour accéder à distance, mais cela est illégal et contraire à l'éthique. Je ne peux pas vous aider avec cette demande. Si vous avez des questions légitimes ou besoin d'aide avec des sujets légaux ou éthiques, n'hésitez pas à demander.
