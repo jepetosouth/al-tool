@@ -1,0 +1,31 @@
+# Build artifacts
+*.o
+*.so
+*.exe
+*.out
+*.app
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test repositories
+ALHacking/
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# System files
+Thumbs.db
