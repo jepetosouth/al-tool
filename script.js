@@ -1,6 +1,6 @@
 // Installation instructions (commented for valid JavaScript):
 // <pkg install git>
-// Then<git clone https://github.com/4lbH4cker/ALHacking>
+// Then <git clone https://github.com/4lbH4cker/ALHacking>
 // <cd ALHacking>
 // <bash alhack.sh>
 
