@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-Tool - Android/Termux Terminal Interface</title>
+    <meta name="description" content="Terminal interface tool for Android penetration testing with Termux and NetHunter">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AL-Tool</h1>
+            <p class="subtitle">Android/Termux Terminal Interface</p>
+        </header>
+
+        <section class="info-box">
+            <p>A terminal interface tool designed for Android-based penetration testing environments.</p>
+            <p>Fully compatible with <strong>Termux</strong> and <strong>NetHunter</strong>.</p>
+        </section>
+
+        <section class="installation">
+            <h2>Quick Installation</h2>
+            
+            <div class="command-group">
+                <h3>Method 1: One-line Install (Recommended)</h3>
+                <div class="command-box">
+                    <code id="install-curl">curl -sSL https://raw.githubusercontent.com/jepetosouth/al-tool/main/install.sh | bash</code>
+                    <button class="copy-btn" onclick="copyToClipboard('install-curl')">📋 Copy</button>
+                </div>
+                <p class="note">Or with wget:</p>
+                <div class="command-box">
+                    <code id="install-wget">wget -qO- https://raw.githubusercontent.com/jepetosouth/al-tool/main/install.sh | bash</code>
+                    <button class="copy-btn" onclick="copyToClipboard('install-wget')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="command-group">
+                <h3>Method 2: Termux Quick Install</h3>
+                <div class="command-box">
+                    <code id="termux-install">pkg update && pkg install git curl -y && curl -sSL https://raw.githubusercontent.com/jepetosouth/al-tool/main/install.sh | bash</code>
+                    <button class="copy-btn" onclick="copyToClipboard('termux-install')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="command-group">
+                <h3>Method 3: Manual Install</h3>
+                <div class="command-box">
+                    <code id="manual-install">git clone https://github.com/jepetosouth/al-tool.git
+cd al-tool
+chmod +x install.sh al-tool.sh
+./install.sh</code>
+                    <button class="copy-btn" onclick="copyToClipboard('manual-install')">📋 Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="usage">
+            <h2>Usage</h2>
+            
+            <div class="command-group">
+                <h3>Interactive Mode</h3>
+                <div class="command-box">
+                    <code id="interactive">al-tool</code>
+                    <button class="copy-btn" onclick="copyToClipboard('interactive')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="command-group">
+                <h3>Command-Line Mode</h3>
+                <div class="command-box">
+                    <code id="cli-commands"># Check dependencies
+al-tool --check
+
+# Install dependencies
+al-tool --install
+
+# Clone ALHacking repository
+al-tool --clone
+
+# Run ALHacking tool
+al-tool --run
+
+# Full automated setup
+al-tool --setup
+
+# Show environment information
+al-tool --info
+
+# Show help
+al-tool --help</code>
+                    <button class="copy-btn" onclick="copyToClipboard('cli-commands')">📋 Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">🔧</span>
+                    <h3>Multi-Environment</h3>
+                    <p>Works on Termux, NetHunter, and standard Linux</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📦</span>
+                    <h3>Auto Detection</h3>
+                    <p>Detects correct package manager automatically</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">✅</span>
+                    <h3>Dependency Management</h3>
+                    <p>Checks and installs dependencies automatically</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🎯</span>
+                    <h3>Interactive & CLI</h3>
+                    <p>Use interactive menu or command-line arguments</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="compatibility">
+            <h2>Compatibility</h2>
+            <ul>
+                <li>✅ <strong>Termux</strong> (Android)</li>
+                <li>✅ <strong>NetHunter</strong> (Kali on Android)</li>
+                <li>✅ <strong>Standard Linux</strong> (Debian, Ubuntu, Fedora, etc.)</li>
+            </ul>
+        </section>
+
+        <section class="links">
+            <h2>Links</h2>
+            <div class="link-buttons">
+                <a href="https://github.com/jepetosouth/al-tool" class="btn" target="_blank">GitHub Repository</a>
+                <a href="https://github.com/4lbH4cker/ALHacking" class="btn" target="_blank">ALHacking Tool</a>
+                <a href="https://github.com/jepetosouth/al-tool/blob/main/README.md" class="btn" target="_blank">Documentation</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Created by <a href="https://github.com/jepetosouth" target="_blank">Jeanjj</a></p>
+            <p class="disclaimer">For educational and ethical penetration testing purposes only.</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast">Copied to clipboard!</div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
