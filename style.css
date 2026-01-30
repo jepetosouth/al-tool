@@ -1,0 +1,40 @@
+/* AL-Tool Styles - Fallback styles if JavaScript is disabled */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 20px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2 {
+    color: #00ff00;
+    margin-bottom: 20px;
+}
+
+code, pre {
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    margin: 10px 0;
+    overflow-x: auto;
+    color: #00ff00;
+}
