@@ -36,17 +36,22 @@ This ensures you have the latest package information.
 
 Choose one of these methods:
 
-#### Option A: Quick Install (One Command)
-```bash
-pkg install wget -y && wget -O - https://raw.githubusercontent.com/jepetosouth/al-tool/main/install-termux.sh | bash
-```
-
-#### Option B: Download and Run
+#### Option A: Download and Review (Recommended for Security)
 ```bash
 pkg install wget -y
 wget https://raw.githubusercontent.com/jepetosouth/al-tool/main/install-termux.sh
+# Review the script before running
+cat install-termux.sh
+# If satisfied, make executable and run
 chmod +x install-termux.sh
 ./install-termux.sh
+```
+
+#### Option B: Quick Install (One Command)
+⚠️ **Security Note**: This method downloads and executes code immediately. Use only if you trust the source.
+
+```bash
+pkg install wget -y && wget -O - https://raw.githubusercontent.com/jepetosouth/al-tool/main/install-termux.sh | bash
 ```
 
 ### 5. Run ALHacking

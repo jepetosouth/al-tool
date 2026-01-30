@@ -36,9 +36,16 @@ elif [ -d "/data/data/com.termux" ]; then
     print_status "Detected Termux environment (NetHunter compatible)"
     PKG_CMD="pkg"
 else
-    print_warning "NetHunter environment not detected"
-    print_warning "Attempting standard Linux installation..."
-    PKG_CMD="apt-get"
+    print_warning "NetHunter/Termux environment not detected"
+    # Check if we're on a standard Linux system with sudo
+    if command -v sudo &> /dev/null; then
+        print_warning "Attempting standard Linux installation with sudo..."
+        PKG_CMD="apt-get"
+    else
+        print_error "This script requires Termux, NetHunter, or a Linux system with sudo"
+        print_error "Please run this script in a supported environment"
+        exit 1
+    fi
 fi
 
 # Update package list
@@ -71,7 +78,7 @@ INSTALL_DIR="$HOME/ALHacking"
 # Check if ALHacking already exists
 if [ -d "$INSTALL_DIR" ]; then
     print_warning "ALHacking directory already exists at $INSTALL_DIR"
-    read -p "Do you want to remove and reinstall? (y/n): " -n 1 -r
+    read -p "Do you want to remove and reinstall? (y/n): " -r REPLY
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         print_status "Removing existing installation..."

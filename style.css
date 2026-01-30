@@ -1,4 +1,4 @@
-/* AL-Tool Styles - Fallback styles if JavaScript is disabled */
+/* AL-Tool Styles */
 
 * {
     margin: 0;
@@ -11,30 +11,92 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     padding: 20px;
-    line-height: 1.6;
+    margin: 0;
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
     background: rgba(0, 0, 0, 0.8);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-h1, h2 {
+h1 {
     color: #00ff00;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #00ff00;
 }
 
-code, pre {
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 5px;
-    display: block;
-    margin: 10px 0;
-    overflow-x: auto;
+h2 {
     color: #00ff00;
+    margin-bottom: 15px;
+}
+
+.section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #00ff00;
+}
+
+.command {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.step {
+    color: #ffff00;
+    font-weight: bold;
+    margin: 15px 0 5px 0;
+}
+
+.note {
+    color: #ff6b6b;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+a {
+    color: #64b5f6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #90caf9;
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .command {
+        font-size: 0.9em;
+        padding: 10px;
+    }
 }

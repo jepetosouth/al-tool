@@ -59,7 +59,7 @@ INSTALL_DIR="$HOME/ALHacking"
 # Check if ALHacking already exists
 if [ -d "$INSTALL_DIR" ]; then
     print_warning "ALHacking directory already exists at $INSTALL_DIR"
-    read -p "Do you want to remove and reinstall? (y/n): " -n 1 -r
+    read -p "Do you want to remove and reinstall? (y/n): " -r REPLY
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         print_status "Removing existing installation..."
