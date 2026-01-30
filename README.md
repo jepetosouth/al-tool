@@ -102,7 +102,7 @@ al-tool --help
 2) Install dependencies
 3) Clone ALHacking repository
 4) Run ALHacking tool
-5) Full setup (install + clone + run)
+5) Full setup (install + clone)
 6) Show environment info
 0) Exit
 ════════════════════════════════════════

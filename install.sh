@@ -3,7 +3,7 @@
 # AL-Tool Installation Script
 # For Termux, NetHunter, and standard Linux environments
 
-set -e
+# Note: Using set -e but with explicit error handling where needed
 
 # Color codes
 RED='\033[0;31m'
@@ -29,8 +29,15 @@ echo -e "${YELLOW}[*]${NC} Installation directory: $INSTALL_DIR"
 # Create installation directory
 if [ -d "$INSTALL_DIR" ]; then
     echo -e "${YELLOW}[!]${NC} AL-Tool is already installed at $INSTALL_DIR"
-    read -p "Do you want to reinstall? (y/n): " -n 1 -r
+    read -p "Do you want to reinstall? (y/n): " -r
     echo
+    
+    # Check if REPLY is set and not empty
+    if [ -z "${REPLY+x}" ] || [ -z "$REPLY" ]; then
+        echo -e "${YELLOW}[*]${NC} No input received, installation cancelled"
+        exit 0
+    fi
+    
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${YELLOW}[*]${NC} Installation cancelled"
         exit 0
@@ -74,17 +81,25 @@ else
     # Standard Linux: try to create symlink in /usr/local/bin
     if [ -w "/usr/local/bin" ]; then
         echo -e "${YELLOW}[*]${NC} Creating symlink in /usr/local/bin..."
-        ln -sf "$INSTALL_DIR/al-tool.sh" "/usr/local/bin/al-tool"
-    elif [ -d "$HOME/.local/bin" ]; then
+        if ! ln -sf "$INSTALL_DIR/al-tool.sh" "/usr/local/bin/al-tool"; then
+            echo -e "${YELLOW}[!]${NC} Failed to create symlink in /usr/local/bin"
+            echo -e "${YELLOW}[*]${NC} Trying alternative location..."
+        fi
+    fi
+    
+    if [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"; then
         echo -e "${YELLOW}[*]${NC} Creating symlink in $HOME/.local/bin..."
         mkdir -p "$HOME/.local/bin"
         ln -sf "$INSTALL_DIR/al-tool.sh" "$HOME/.local/bin/al-tool"
         
         # Add to PATH if not already there
         if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-            echo -e "${YELLOW}[*]${NC} Adding $HOME/.local/bin to PATH..."
-            echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-            echo -e "${YELLOW}[*]${NC} Please run: source ~/.bashrc"
+            # Check if the export line already exists in .bashrc
+            if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' "$HOME/.bashrc" 2>/dev/null; then
+                echo -e "${YELLOW}[*]${NC} Adding $HOME/.local/bin to PATH..."
+                echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+                echo -e "${YELLOW}[*]${NC} Please run: source ~/.bashrc"
+            fi
         fi
     fi
 fi

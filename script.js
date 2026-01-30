@@ -3,6 +3,22 @@ function copyToClipboard(elementId) {
     const element = document.getElementById(elementId);
     const text = element.textContent;
     
+    // Try modern Clipboard API first (preferred method)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Copied to clipboard!');
+        }).catch(() => {
+            // Fallback to legacy method
+            fallbackCopyToClipboard(text);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopyToClipboard(text);
+    }
+}
+
+// Fallback copy method using deprecated execCommand (for older browsers)
+function fallbackCopyToClipboard(text) {
     // Create temporary textarea
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -10,27 +26,23 @@ function copyToClipboard(elementId) {
     textarea.style.opacity = '0';
     document.body.appendChild(textarea);
     
-    // Select and copy
-    textarea.select();
-    textarea.setSelectionRange(0, 99999); // For mobile devices
-    
     try {
-        document.execCommand('copy');
-        showToast('Copied to clipboard!');
-    } catch (err) {
-        // Fallback for modern browsers
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Copied to clipboard!');
-            }).catch(() => {
-                showToast('Failed to copy. Please copy manually.');
-            });
+        // Select and copy
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // For mobile devices
+        
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showToast('Copied to clipboard!');
         } else {
             showToast('Failed to copy. Please copy manually.');
         }
+    } catch (err) {
+        showToast('Failed to copy. Please copy manually.');
+    } finally {
+        // Always remove the textarea
+        document.body.removeChild(textarea);
     }
-    
-    document.body.removeChild(textarea);
 }
 
 // Show toast notification
@@ -114,7 +126,7 @@ document.addEventListener('keydown', (e) => {
 // Service Worker for offline support (optional enhancement)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {
             // Service worker registration failed, that's ok
         });
     });

@@ -106,7 +106,15 @@ install_dependencies() {
     if [ "$pkg_manager" = "pkg" ]; then
         pkg update -y
     else
-        sudo apt update -y || apt update -y
+        # Try with sudo first, then without if it fails
+        if command -v sudo >/dev/null 2>&1 && [ "$(id -u)" -ne 0 ]; then
+            if ! sudo apt update -y 2>/dev/null; then
+                echo -e "${YELLOW}[!]${NC} sudo failed, trying without sudo..."
+                apt update -y || echo -e "${YELLOW}[!]${NC} Package update failed, continuing anyway..."
+            fi
+        else
+            apt update -y || echo -e "${YELLOW}[!]${NC} Package update failed, continuing anyway..."
+        fi
     fi
     
     # Install git
@@ -115,7 +123,14 @@ install_dependencies() {
         if [ "$pkg_manager" = "pkg" ]; then
             pkg install git -y
         else
-            sudo apt install git -y || apt install git -y
+            if command -v sudo >/dev/null 2>&1 && [ "$(id -u)" -ne 0 ]; then
+                if ! sudo apt install git -y 2>/dev/null; then
+                    echo -e "${YELLOW}[!]${NC} sudo failed, trying without sudo..."
+                    apt install git -y || echo -e "${RED}[!]${NC} Failed to install git"
+                fi
+            else
+                apt install git -y || echo -e "${RED}[!]${NC} Failed to install git"
+            fi
         fi
     fi
     
@@ -125,7 +140,14 @@ install_dependencies() {
         if [ "$pkg_manager" = "pkg" ]; then
             pkg install bash -y
         else
-            sudo apt install bash -y || apt install bash -y
+            if command -v sudo >/dev/null 2>&1 && [ "$(id -u)" -ne 0 ]; then
+                if ! sudo apt install bash -y 2>/dev/null; then
+                    echo -e "${YELLOW}[!]${NC} sudo failed, trying without sudo..."
+                    apt install bash -y || echo -e "${RED}[!]${NC} Failed to install bash"
+                fi
+            else
+                apt install bash -y || echo -e "${RED}[!]${NC} Failed to install bash"
+            fi
         fi
     fi
     
@@ -141,8 +163,14 @@ clone_alhacking() {
     
     if [ -d "$repo_dir" ]; then
         echo -e "${YELLOW}[!]${NC} Directory $repo_dir already exists"
-        read -p "Do you want to remove it and clone again? (y/n): " -n 1 -r
-        echo
+        read -p "Do you want to remove it and clone again? (y/n): " -r
+        
+        # Check if REPLY is set and not empty
+        if [ -z "${REPLY+x}" ] || [ -z "$REPLY" ]; then
+            echo -e "${YELLOW}[*]${NC} No input received, using existing directory"
+            return 0
+        fi
+        
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             rm -rf "$repo_dir"
         else
@@ -170,21 +198,29 @@ run_alhacking() {
         return 1
     fi
     
-    cd "$repo_dir" || return 1
+    # Use subshell to isolate directory change
+    (
+        cd "$repo_dir" || exit 1
+        
+        if [ ! -f "$script_name" ]; then
+            echo -e "${RED}[!]${NC} Script $script_name not found"
+            exit 1
+        fi
+        
+        echo -e "${YELLOW}[*]${NC} Making script executable..."
+        chmod +x "$script_name"
+        
+        echo -e "${YELLOW}[*]${NC} Running $script_name..."
+        bash "$script_name"
+    )
     
-    if [ ! -f "$script_name" ]; then
-        echo -e "${RED}[!]${NC} Script $script_name not found"
-        cd ..
+    local exit_code=$?
+    if [ $exit_code -ne 0 ]; then
+        echo -e "${RED}[!]${NC} Script execution failed with exit code $exit_code"
         return 1
     fi
     
-    echo -e "${YELLOW}[*]${NC} Making script executable..."
-    chmod +x "$script_name"
-    
-    echo -e "${YELLOW}[*]${NC} Running $script_name..."
-    bash "$script_name"
-    
-    cd ..
+    return 0
 }
 
 # Interactive menu
@@ -195,7 +231,7 @@ show_menu() {
     echo "2) Install dependencies"
     echo "3) Clone ALHacking repository"
     echo "4) Run ALHacking tool"
-    echo "5) Full setup (install + clone + run)"
+    echo "5) Full setup (install + clone)"
     echo "6) Show environment info"
     echo "0) Exit"
     echo -e "${BLUE}════════════════════════════════════════${NC}"
