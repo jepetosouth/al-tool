@@ -9,6 +9,9 @@ echo "  AL-Tool Installation Script for NetHunter"
 echo "================================================"
 echo ""
 
+# Repository configuration
+REPO_URL="https://github.com/4lbH4cker/ALHacking"
+
 # Color codes for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -78,7 +81,7 @@ INSTALL_DIR="$HOME/ALHacking"
 # Check if ALHacking already exists
 if [ -d "$INSTALL_DIR" ]; then
     print_warning "ALHacking directory already exists at $INSTALL_DIR"
-    read -p "Do you want to remove and reinstall? (y/n): " -r REPLY
+    read -p "Do you want to remove the existing installation and reinstall? (y/n): " -r REPLY
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         print_status "Removing existing installation..."
@@ -91,7 +94,7 @@ fi
 
 # Clone the ALHacking repository
 print_status "Cloning ALHacking repository..."
-if git clone https://github.com/4lbH4cker/ALHacking "$INSTALL_DIR"; then
+if git clone "$REPO_URL" "$INSTALL_DIR"; then
     print_status "Repository cloned successfully"
 else
     print_error "Failed to clone repository. Please check your internet connection."
