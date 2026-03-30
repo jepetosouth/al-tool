@@ -45,7 +45,7 @@ else
     if command -v sudo &>/dev/null; then
         sudo apt-get install -y curl jq
     else
-        apt-get install -y curl jq || warn "Could not install packages; please install curl and jq manually (e.g. apt-get install curl jq)."
+        apt-get install -y curl jq || warn "Could not install packages; please install curl and jq manually (e.g. sudo apt-get install curl jq)."
     fi
 fi
 
@@ -58,8 +58,11 @@ chmod +x "${INSTALL_DIR}/${SCRIPT_NAME}"
 # ── PATH hint ─────────────────────────────────────────────────────────────────
 if [[ ":$PATH:" != *":${INSTALL_DIR}:"* ]]; then
     warn "${INSTALL_DIR} is not in PATH."
-    SHELL_RC="${HOME}/.bashrc"
-    [[ -f "${HOME}/.zshrc" ]] && SHELL_RC="${HOME}/.zshrc"
+    if [[ "$SHELL" == */zsh ]] || [[ -f "${HOME}/.zshrc" && ! -f "${HOME}/.bashrc" ]]; then
+        SHELL_RC="${HOME}/.zshrc"
+    else
+        SHELL_RC="${HOME}/.bashrc"
+    fi
     echo "export PATH=\"${INSTALL_DIR}:\$PATH\"" >> "$SHELL_RC"
     warn "Added to ${SHELL_RC}. Run: source ${SHELL_RC}"
 fi

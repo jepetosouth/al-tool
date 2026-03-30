@@ -111,9 +111,10 @@ add_to_history() {
     count=$(jq 'length' "$HISTORY_FILE")
     if [[ "$count" -gt "$MAX_HISTORY" ]]; then
         local trim
-        tmp=$(mktemp)
+        local tmp2
+        tmp2=$(mktemp)
         trim=$(( count - MAX_HISTORY ))
-        jq --argjson trim "$trim" '.[$trim:]' "$HISTORY_FILE" >"$tmp" && mv "$tmp" "$HISTORY_FILE" || rm -f "$tmp"
+        jq --argjson trim "$trim" '.[$trim:]' "$HISTORY_FILE" >"$tmp2" && mv "$tmp2" "$HISTORY_FILE" || rm -f "$tmp2"
     fi
 }
 
@@ -178,7 +179,7 @@ banner() {
     echo "| | | | | |____ | | / ____ \\__ \\ |___| || (_) | (_) | | "
     echo "|_| |_| |______||_|/_/    \_|___/\_____|_| \___/ \___/|_| "
     echo -e "${RESET}"
-    echo -e "  ${YELLOW}AI Assistant for Termux${RESET}  |  model: ${CYAN}${AI_MODEL}${RESET}"
+    echo -e "  ${YELLOW}AL-Tool AI Assistant${RESET}  |  model: ${CYAN}${AI_MODEL}${RESET}"
     echo -e "  Type ${BOLD}/help${RESET} for commands, ${BOLD}/quit${RESET} to exit\n"
 }
 
