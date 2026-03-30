@@ -1,5 +1,7 @@
 # Quick Start Guide for AL-Tool on Termux/NetHunter
 
+**[English](QUICKSTART.md)** | [Français](QUICKSTART.fr.md)
+
 This guide will help you get started with AL-Tool on your Android device quickly.
 
 ## Prerequisites Check

@@ -1,5 +1,7 @@
 # AL-Tool - ALHacking Installer for Termux/NetHunter
 
+**[English](README.md)** | [Français](README.fr.md)
+
 A streamlined installation tool for [ALHacking](https://github.com/4lbH4cker/ALHacking) specifically designed for Termux and Kali NetHunter environments on Android devices.
 
 ## Overview

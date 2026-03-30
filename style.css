@@ -25,12 +25,43 @@ body {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.lang-btn {
+    background: rgba(0, 255, 0, 0.2);
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    background: rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.lang-btn:active {
+    transform: translateY(0);
 }
 
 h1 {
     color: #00ff00;
     text-align: center;
     margin-bottom: 30px;
+    margin-top: 20px;
     text-shadow: 0 0 10px #00ff00;
 }
 
@@ -91,8 +122,15 @@ a:hover {
         padding: 20px;
     }
     
+    .lang-switch {
+        position: static;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
     h1 {
         font-size: 1.5em;
+        margin-top: 10px;
     }
     
     .command {

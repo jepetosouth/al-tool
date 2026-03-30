@@ -1,5 +1,7 @@
 # Frequently Asked Questions (FAQ)
 
+**[English](FAQ.md)** | [Français](FAQ.fr.md)
+
 ## General Questions
 
 ### What is AL-Tool?
