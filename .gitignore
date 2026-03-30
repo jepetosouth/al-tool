@@ -1,0 +1,56 @@
+# AL-Tool .gitignore
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Test directories
+test-env/
+test-output/
+
+# Build artifacts (if any are added in future)
+dist/
+build/
+*.o
+*.so
+*.dylib
+
+# Package manager files (if added)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python cache (if Python tools are added)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Backup files
+*.bak
+*.backup
+
+# Personal notes
+notes.txt
+TODO.txt
+
+# Downloaded test files
+ALHacking/
+test-clone/
